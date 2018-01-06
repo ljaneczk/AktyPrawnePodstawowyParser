@@ -2,7 +2,7 @@ public enum NodeType {
     plik,
     dział,
     rozdział,
-    podrozdział,
+    tytuł,
     artykuł,
     ustęp,
     punkt,
@@ -20,8 +20,8 @@ public enum NodeType {
             case dział:
                 return rozdział;
             case rozdział:
-                return podrozdział;
-            case podrozdział:
+                return tytuł;
+            case tytuł:
                 return artykuł;
             case artykuł:
                 return ustęp;
@@ -47,7 +47,7 @@ public enum NodeType {
                 return "^DZIAŁ.*";
             case rozdział:
                 return "^Rozdział.*";
-            case podrozdział:
+            case tytuł:
                 return "^[\\p{Lu}|\\p{Punct}|\\p{Space}]*";
             case artykuł:
                 return "^Art\\..*";

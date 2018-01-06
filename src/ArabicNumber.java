@@ -17,9 +17,4 @@ public class ArabicNumber implements NumberMethods {
         }
         return decimalNumber;
     }
-
-    /*@Override
-    public boolean isGreaterOrEqualThan(Object other) {
-        return true;
-    }*/
 }

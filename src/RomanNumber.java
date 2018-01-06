@@ -48,12 +48,4 @@ public class RomanNumber implements NumberMethods {
         }
         return decimalNumber;
     }
-
-    /*@Override
-    public boolean isGreaterOrEqualThan(Object other) {
-        if ( ! (other instanceof RomanNumber))
-            return true;
-        RomanNumber number = (RomanNumber) other;
-        return true;
-    }*/
 }

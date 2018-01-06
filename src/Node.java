@@ -1,11 +1,10 @@
-import java.util.LinkedList;
 import java.util.Vector;
 
 public class Node {
     private NodeType Type;
     private Number FieldNumber;
-    private Number Begin;
-    private Number End;
+    private Number LeftRange;
+    private Number RightRange;
     private Vector <Node> Neighbours;
     private String[] Content;
     private int ContentSize;
@@ -15,7 +14,7 @@ public class Node {
         ContentSize = 0;
         Content = new String[0];
         Neighbours = new Vector<>(0);
-        FieldNumber = Begin = End = null;
+        FieldNumber = LeftRange = RightRange = null;
         if (type == NodeType.plik)
             FieldNumber = new Number("",NodeType.plik);
     }
@@ -36,41 +35,39 @@ public class Node {
         return Neighbours;
     }
 
-    public Number getBegin() {
-        return Begin;
+    public Number getLeftRange() {
+        return LeftRange;
     }
 
-    public Number getEnd() {
-        return End;
+    public Number getRightRange() {
+        return RightRange;
     }
 
-    public void setBeginAndEnd() {
-        Begin = End = null;
+    public void setLeftRangeAndRightRange() {
+        LeftRange = RightRange = null;
     }
 
-    public void updateBeginAndEnd (Node vertex) {
+    public void updateLeftRangeAndRightRange (Node vertex) {
         if (vertex.getNodeType() != NodeType.artykuł) {
-            if (vertex.Begin != null && vertex.Begin.isNotGreaterThan(Begin))
-                Begin = vertex.Begin;
-            if (vertex.End != null && vertex.End.isNotLessThan(End))
-                End = vertex.End;
+            if (vertex.LeftRange != null && (vertex.LeftRange).isNotGreaterThan(LeftRange))
+                LeftRange = vertex.LeftRange;
+            if (vertex.RightRange != null && (vertex.RightRange).isNotLessThan(RightRange))
+                RightRange = vertex.RightRange;
         }
         else {
-            if (vertex.FieldNumber.isNotGreaterThan(Begin))
-                Begin = vertex.FieldNumber;
-            if (vertex.FieldNumber.isNotLessThan(End))
-                End = vertex.FieldNumber;
+            if ((vertex.FieldNumber).isNotGreaterThan(LeftRange))
+                LeftRange = vertex.FieldNumber;
+            if ((vertex.FieldNumber).isNotLessThan(RightRange))
+                RightRange = vertex.FieldNumber;
         }
     }
 
     public void addVertexToNeighbours (Node vertex) {
-        //int s = Neighbours.size();
         Neighbours.addElement(vertex);
-        //System.out.println(s + "   " + Neighbours.size());
-        if (vertex.FieldNumber.isNotGreaterThan(Begin))
-            Begin = vertex.getNumber();
-        if (vertex.FieldNumber.isNotLessThan(End))
-            End = vertex.FieldNumber;
+        if (vertex.FieldNumber.isNotGreaterThan(LeftRange))
+            LeftRange = vertex.getNumber();
+        if (vertex.FieldNumber.isNotLessThan(RightRange))
+            RightRange = vertex.FieldNumber;
     }
 
     public void addContentLine(String line) {
@@ -114,11 +111,11 @@ public class Node {
         }
     }
 
-    public void printContentWithoutEnter(String beginning) {
+    public void printContentWithAddingArticlesRange(String beginning, String articlesRange) {
         if(ContentSize > 0) {
-            for (int i = 0; i < ContentSize - 1; i++)
+            System.out.println(beginning+Content[0]+articlesRange);
+            for (int i = 1; i < ContentSize; i++)
                 System.out.println(beginning+Content[i]);
-            System.out.print(beginning+Content[ContentSize-1]);
         }
     }
 }

@@ -5,6 +5,4 @@ public interface NumberMethods {
     int getValueOfDigit(char character);
 
     int countValue(String line);
-
-    //public boolean isGreaterOrEqualThan(Object other);
 }

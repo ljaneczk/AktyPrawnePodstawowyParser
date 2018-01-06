@@ -8,15 +8,12 @@ public class Number {
         int beginIndex = findBeginAfterErasingBeginning(type);
         line = line.substring(beginIndex);
         findPartsOfNumber(line,type);
-        //System.out.println(toString()+'\n');
     }
 
     Number(String line, Node vertex) {
         IntegerPartOfNumber = 0;
         StringPartOfNumber = "";
-        line = line.substring(0);
         findPartsOfNumber(line,vertex.getNodeType());
-        //System.out.println(toString()+'\n');
     }
 
     private int findBeginAfterErasingBeginning (NodeType type) {
@@ -34,7 +31,7 @@ public class Number {
 
     private void findPartsOfNumber(String line, NodeType type) {
         int index = 0;
-        if(type != NodeType.podrozdział && type!=NodeType.plik && type!=NodeType.litera) {
+        if(type != NodeType.tytuł && type != NodeType.plik && type != NodeType.litera) {
             if ( isArabic(line)) {
                 ArabicNumber number;
                 number = new ArabicNumber();
@@ -51,7 +48,7 @@ public class Number {
             }
         }
 
-        if (type != NodeType.podrozdział) {
+        if (type != NodeType.tytuł) {
             while (index < line.length() && isLetter(line.charAt(index))) {
                 StringPartOfNumber = StringPartOfNumber + line.charAt(index);
                 index++;
@@ -101,6 +98,6 @@ public class Number {
     }
 
     public String toString() {
-        return Integer.toString(IntegerPartOfNumber)+" "+StringPartOfNumber;
+        return Integer.toString(IntegerPartOfNumber)+StringPartOfNumber;
     }
 }
